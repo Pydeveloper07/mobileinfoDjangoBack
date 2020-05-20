@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+<section class="listing-top-header">
+    <h1>{{phone.name}}</h1>
+</section>
+<div class="container mt-3">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home"></i><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'listings' %}">Featured Listings</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{phone.name}}</li>
+        </ol>
+    </nav>
+
+    <section id="listing">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <img src="{{phone.photo_main.url}}" alt="" class="img-main">
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="row">
+                    {% if phone.photo_1 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_1.url}}" data-lightbox="phone-images"
+                            alt="...">
+                            <img src="{{phone.photo_1.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if phone.photo_2 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_2.url}}" data-lightbox="phone-images" alt="...">
+                            <img src="{{phone.photo_2.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if phone.photo_3 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_3.url}}" data-lightbox="phone-images" alt="...">
+                            <img src="{{phone.photo_3.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if phone.photo_4 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_4.url}}" data-lightbox="phone-images" alt="...">
+                            <img src="{{phone.photo_4.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if phone.photo_5 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_5.url}}" data-lightbox="phone-images" alt="...">
+                            <img src="{{phone.photo_5.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if phone.photo_6 %}
+                    <div class="col-md-4 col-lg-4 thumb">
+                        <a href="{{phone.photo_6.url}}" data-lightbox="phone-images" alt="...">
+                            <img src="{{phone.photo_6.url}}" alt="...">
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="content-listing mt-4">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="category">
+                        <p class="label">Price&Color</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Price:</dt>
+                            <dd class="col-md-8 text-right">{{phone.price|intcomma}} USD</dd>
+                            <dt class="col-md-4 text-left">Color:</dt>
+                            <dd class="col-md-8 text-right">{{phone.color}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Launch</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Announced:</dt>
+                            <dd class="col-md-8 text-right">{{phone.announced_date}}</dd>
+                            <dt class="col-md-4 text-left">Status:</dt>
+                            <dd class="col-md-8 text-right">{{phone.status}}. Released {{phone.released_date}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Display</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Type:</dt>
+                            <dd class="col-md-8 text-right">{{phone.display_type}}</dd>
+                            <dt class="col-md-4 text-left">Size:</dt>
+                            <dd class="col-md-8 text-right">{{phone.display_size}} inches</dd>
+                            <dt class="col-md-4 text-left">Resolution:</dt>
+                            <dd class="col-md-8 text-right">{{phone.display_resolution}} pixels</dd>
+                            <dt class="col-md-4 text-left">Multitouch:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.multitouch %} Yes {% else %} No {% endif %}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Body</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Dimensions:</dt>
+                            <dd class="col-md-8 text-right">{{phone.dimensions}}</dd>
+                            <dt class="col-md-4 text-left">Weight:</dt>
+                            <dd class="col-md-8 text-right">{{phone.weight}} g</dd>
+                            <dt class="col-md-4 text-left">SIM:</dt>
+                            <dd class="col-md-8 text-right">{{phone.sim}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Memory</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">RAM:</dt>
+                            <dd class="col-md-8 text-right">{{phone.ram}}GB</dd>
+                            <dt class="col-md-4 text-left">Storage:</dt>
+                            <dd class="col-md-8 text-right">{{phone.storage}}GB</dd>
+                            <dt class="col-md-4 text-left">Card Slot:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.is_cardslot_exists %} Yes {% else %} No
+                                {% endif %}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Main Camera</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Resolution:</dt>
+                            <dd class="col-md-8 text-right">{{phone.mc_type}}:{{phone.mc}}</dd>
+                            <dt class="col-md-4 text-left">Features:</dt>
+                            <dd class="col-md-8 text-right">{{phone.mc_features}}</dd>
+                            <dt class="col-md-4 text-left">Video:</dt>
+                            <dd class="col-md-8 text-right">{{phone.mc_video}}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="category">
+                        <p class="label">Selfie Camera</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Resolution:</dt>
+                            <dd class="col-md-8 text-right">{{phone.sc_type}}}: {{phone.sc}}</dd>
+                            <dt class="col-md-4 text-left">Features:</dt>
+                            <dd class="col-md-8 text-right">{{phone.sc_features}}</dd>
+                            <dt class="col-md-4 text-left">Video:</dt>
+                            <dd class="col-md-8 text-right">{{phone.sc_video}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Sound</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Loudspeaker:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.loudspeaker %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">3.5mm jack</dt>
+                            <dd class="col-md-8 text-right">{% if phone.headphone_connector %} Yes {% else %} No
+                                {% endif %}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Platform</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">OS:</dt>
+                            <dd class="col-md-8 text-right">{{phone.os}}</dd>
+                            <dt class="col-md-4 text-left">CPU:</dt>
+                            <dd class="col-md-8 text-right">{{phone.cpu_type}}({{phone.cpu}})</dd>
+                            <dt class="col-md-4 text-left">Chipset:</dt>
+                            <dd class="col-md-8 text-right">{{phone.chipset}}</dd>
+                            <dt class="col-md-4 text-left">GPU:</dt>
+                            <dd class="col-md-8 text-right">{{phone.gpu}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Communication</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Network:</dt>
+                            <dd class="col-md-8 text-right">{{phone.network}}</dd>
+                            <dt class="col-md-4 text-left">WLAN:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.wlan %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">Bluetooth:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.bluetooth %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">GPS:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.gps %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">Radio:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.radio %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">NFC:</dt>
+                            <dd class="col-md-8 text-right">{% if phone.nfc %} Yes {% else %} No
+                                {% endif %}</dd>
+                            <dt class="col-md-4 text-left">USB:</dt>
+                            <dd class="col-md-8 text-right">{{phone.usb}}</dd>
+                        </dl>
+                    </div>
+                    <div class="category">
+                        <p class="label">Misc</p>
+                        <hr>
+                        <dl class="row">
+                            <dt class="col-md-4 text-left">Battery:</dt>
+                            <dd class="col-md-8 text-right">
+                                {% if phone.is_battery_removable %} Removable {% else %} Non-removable
+                                {% endif %} {{phone.battery_type}} {{phone.battery_capacity}} mAh battery
+                            </dd>
+                            <dt class="col-md-4 text-left">Sensors:</dt>
+                            <dd class="col-md-8 text-right">{{phone.sensors}}</dd>
+                        </dl>
+                    </div>
+                </div>
+                <p class="description">
+                    {{phone.description}}
+                </p>
+            </div>
+        </div>
+    </section>
+    <div id="comments" class="mb-4">
+        <div class="screen-overlay">
+            <form action="listing.html" class="add-comment-form" method="POST">
+                <h1>Add Comment</h1>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="comment" cols="30" rows="2"
+                        placeholder="Your comment..."></textarea>
+                </div>
+                <input type="submit" value="Add Comment" class="btn btn-primary">
+                <span id="exit">X</span>
+            </form>
+        </div>
+        <div class="controls">
+            <button class="btn btn-primary" id="show-comments-btn">View All (2) Comments</button>
+            <button class="btn btn-success" id="add-comment-btn">Add Comment</button>
+        </div>
+        <div class="comment-body mt-3">
+            <div class="comment">
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> John Kelly <span>Date: 02/03/2020,
+                        14:24</span></h1>
+                <p class="comment-content">It is a very cool phone! I would recommend it to everyone!</p>
+                <div class="comment-footer row">
+                    <a href="" class="reply-link col-md-6">Reply<i class="fas fa-reply-all"></i></a>
+                    <div class="col-md-6">
+                        <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
+                        <a href="" class="dislike"><i class="far fa-thumbs-down"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="comment comment-reply">
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Alisa <span>Date: 02/03/2020, 16:33</span>
+                </h1>
+                <p class="comment-content">I agree with you!</p>
+            </div>
+            <div class="comment comment-reply">
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Simpson <span>Date: 02/03/2020, 16:33</span>
+                </h1>
+                <p class="comment-content">Flipping is a bit annoying!</p>
+            </div>
+            <div class="comment">
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Robert <span>Date: 02/03/2020,
+                        14:24</span></h1>
+                <p class="comment-content">It hasn't been much since I bought it. Working perfectly!</p>
+                <div class="comment-footer row">
+                    <a href="" class="reply-link col-md-6">Reply<i class="fas fa-reply-all"></i></a>
+                    <div class="col-md-6">
+                        <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
+                        <a href="" class="dislike"><i class="far fa-thumbs-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

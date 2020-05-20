@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div id="preloader">
+    <div id="load">
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+    </div>
+</div>
+<section id="home">
+    <div class="caption">
+        <h1>WELCOME TO <strong>MOBILE WORLD</strong></h1>
+        <a href="#about" class="start-now-btn">START NOW</a>
+    </div>
+</section>
+
+<section id="about">
+    <h1>Welcome to my Web Site!</h1>
+    <p>
+        This is a brand new web site whose use is to provide users with latest news and information about Mobile World.
+        You can find any information about a phone and even freely leave your comment about them.
+        Enjoy it and feel free to contact me if you have any questions or suggestions to improve the websites
+        capabilities!
+    </p>
+    <a href="#contact" class="contact-me font-weight-bold">CONTACT ME</a>
+</section>
+
+<section id="upcoming-phones">
+    <h1>Upcoming&New</h1>
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    {% for phone in upcoming_phones %}
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card">
+                            <img src="{{ phone.photo_main.url }}" class="card-img-top" alt="...">
+                            <h2 class="img-overlay">
+                                <span class="badge badge-primary text-white">${{phone.price|intcomma}}</span>
+                            </h2>
+                            <div class="card-body">
+                                <h5 class="card-title">{{phone.name}}</h5>
+                                <hr>
+                                <div class="row" style="text-align:left">
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Announced:</dt>
+                                            <dd>{{phone.announced_date}}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Resolution:</dt>
+                                            <dd>{{phone.display_resolution}}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Weight:</dt>
+                                            <dd>{{phone.weight}} g</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>OS:</dt>
+                                            <dd>{{phone.os}}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-12 more-info">
+                                        <a href="#">More Info</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact">
+        <div class="contact-header">
+            <div class="container">
+                <h1>CONTACT ME</h1>
+                <p>Contact me to suggest any improvements</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row text-center caption">
+                <div class="col-md-4">
+                    <p class="icon"><i class="fas fa-map-marker-alt fa-4x"></i></p>
+                    <p>Yunusobod-17</p>
+                    <p>Tashkent</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="icon"><i class="fas fa-mobile-alt fa-4x"></i></p>
+                    <p>Mon - Fri 08:00 19:00</p>
+                    <p>+998(94) 1701170</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="icon"><i class="far fa-envelope fa-4x"></i></p>
+                    <p>Feel free to Email me</p>
+                    <p>inha07111999@gmail.com</p>
+                </div>
+                <form action="#" method="post" id="contact-form" class="mt-3">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Your email address"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="subject" placeholder="Subject">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" cols="40" rows="3"
+                                    placeholder="You message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="submit" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

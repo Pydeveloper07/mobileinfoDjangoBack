@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="shortcut icon" href="images/icons/shortcut_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg custom-nav fixed-top">
+        <a class="navbar-brand" href="#"><i class="fa fa-mobile-alt fa-2x"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+            </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fa fa-home"></i>Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown menu-large">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Companies
+                    </a>
+                    <div class="dropdown-menu mega-menu" aria-labelledby="navbarDropdown">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="#"><img class="icon-company" src="images/icons/samsung.png">Samsung</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#"><img class="icon-company" src="images/icons/apple.png"> Apple</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#"><img class="icon-company" src="images/icons/xiaomi.png">Xiaomi</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="listings.html">Featured Listings</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Login <i class="fa fa-sign-in-alt"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Register <i class="fa fa-user-plus"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content" style="margin-left:0">
+        <div class="advanced-search mb-4">
+            <div class="search-title">
+                <h1>Enjoy Advanced Search Service</h1>
+            </div>
+            <form action="search.html" method="POST" class="row">
+                <div class="col-md-2 col-lg-2 col-sm-4 mb-3">
+                    <input class="form-control" type="text" name="brand" placeholder="Brand (ex. Apple)">
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-4">
+                    <select name="price" class="form-control">
+                        <option value="" disabled selected>Price(Max)</option>
+                        <option value="150">$150</option>
+                        <option value="300">$300</option>
+                        <option value="450">$450</option>
+                        <option value="600">$600</option>
+                        <option value="750">$750</option>
+                        <option value="900">$900+</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-4">
+                    <input class="form-control" type="number" name="weight" placeholder="Weight (g)" min="0" step="10">
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-4">
+                    <select name="ram" class="form-control">
+                        <option value="" disabled selected>RAM(Max)</option>
+                        <option value="1">1GB</option>
+                        <option value="2">2GB</option>
+                        <option value="4">4GB</option>
+                        <option value="6">6GB</option>
+                        <option value="8">8GB</option>
+                        <option value="10">10GB+</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-4">
+                    <select name="storage" class="form-control">
+                        <option value="" disabled selected>Storage(Max)</option>
+                        <option value="8">8GB</option>
+                        <option value="16">16GB</option>
+                        <option value="32">32GB</option>
+                        <option value="64">64GB</option>
+                        <option value="128">128GB</option>
+                        <option value="256">256GB</option>
+                        <option value="512">512GB+</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-4">
+                    <select name="cpu" class="form-control">
+                        <option value="" disabled selected>CPU</option>
+                        <option value="1">Single Core</option>
+                        <option value="2">Dual Core</option>
+                        <option value="4">Quad Core</option>
+                        <option value="6">Hexa Core</option>
+                        <option value="8">Octa Core</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-4 mb-3">
+                    <select name="selfie_camera" class="form-control">
+                        <option value="" disabled selected>Selfie Camera</option>
+                        <option value="single">Single</option>
+                        <option value="dual">Dual</option>
+                        <option value="triple">Triple+</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-4">
+                    <select name="main_camera" class="form-control">
+                        <option value="" disabled selected>Main Camera</option>
+                        <option value="single">Single</option>
+                        <option value="dual">Dual</option>
+                        <option value="triple">Triple+</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-4">
+                    <select name="battery" class="form-control">
+                        <option value="" disabled selected>Battery Capacity (mAh)</option>
+                        <option value="2000">2000</option>
+                        <option value="3000">3000</option>
+                        <option value="4000">4000+</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-4">
+                    <input type="submit" value="Search" class="form-control btn btn-danger">
+                </div>
+            </form>
+        </div>
+        <section class="section container mb-5">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="listings.html">Featured Listings</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+                </ol>
+            </nav>
+            <div class="row mt-3">
+                <div class="item col-md-6 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <img src="/images/phones/samsung/z_flip.jpg" alt="..." class="card-image-top">
+                        <hr class="m-0">
+                        <span class="badge badge-danger">$1435</span>
+                        <div class="card-body">
+                            <div class="stats">
+                                <i class="far fa-heart text-danger"></i>1500 <i class="fa fa-eye text-primary"></i>3152
+                                <i class="far fa-comment"></i>8
+                            </div>
+                            <hr class="mt-0">
+                            <h1 class="card-title">Samsung Galaxy Z Flip</h1>
+                            <hr>
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Announced:</dt>
+                                        <dd>11-Feb-2020</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Resolution:</dt>
+                                        <dd>1080x2636</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Weight:</dt>
+                                        <dd>183 g</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>OS:</dt>
+                                        <dd>Android: 10.0</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-12 more-info">
+                                    <a href="listing.html">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item col-md-6 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <img src="/images/phones/samsung/s10_lite.jpg" alt="..." class="card-image-top">
+                        <hr class="m-0">
+                        <span class="badge badge-danger">$585</span>
+                        <div class="card-body">
+                            <div class="stats">
+                                <i class="far fa-heart text-danger"></i>1752 <i class="fa fa-eye text-primary"></i>4251
+                                <i class="far fa-comment"></i>28
+                            </div>
+                            <hr class="mt-0">
+                            <h1 class="card-title">Samsung Galaxy S10 Lite</h1>
+                            <hr>
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Announced:</dt>
+                                        <dd>03-Jan-2020</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Resolution:</dt>
+                                        <dd>1080x2400</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Weight:</dt>
+                                        <dd>186 g</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>OS:</dt>
+                                        <dd>Android: 10.0</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-12 more-info">
+                                    <a href="#">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item col-md-6 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <img src="/images/phones/samsung/note10_lite.jpg" alt="..." class="card-image-top">
+                        <hr class="m-0">
+                        <span class="badge badge-danger">$525</span>
+                        <div class="card-body">
+                            <div class="stats">
+                                <i class="far fa-heart text-danger"></i>1215 <i class="fa fa-eye text-primary"></i>2758
+                                <i class="far fa-comment"></i>15
+                            </div>
+                            <hr class="mt-0">
+                            <h1 class="card-title">Samsung Galaxy Note10 Lite</h1>
+                            <hr>
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Announced:</dt>
+                                        <dd>03-Jan-2020</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Resolution:</dt>
+                                        <dd>1080x2400</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>Weight:</dt>
+                                        <dd>199 g</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl>
+                                        <dt>OS:</dt>
+                                        <dd>Android: 10.0</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-12 more-info">
+                                    <a href="#">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+    <footer>
+        <div class="row">
+            <div class="col-md-2 col-xs-6 text-right" style="margin:0">
+                <p class="vcenter">Copyright &copy;</p>
+            </div>
+            <div class="col-md-3 col-xs-6 text-left">
+                <p class="vcenter">Designed by <strong>Black@Tiger</strong></p>
+            </div>
+            <div class="col-md-7 col-xs-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="social-link" href="#">
+                            <i class="fas fa-phone-alt"></i>
+                            <span class="extended">+998(94)-170-11-70</span>
+                        </a>
+                        <a class="social-link" href="#">
+                            <i class="fab fa-instagram"></i>
+                            <span class="extended">@tukhtamurod_isroilov</span>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="social-link" href="#">
+                            <i class="fab fa-telegram"></i>
+                            <span class="extended">@Black_Tiger07</span>
+                        </a>
+                        <a class="social-link" href="#">
+                            <i class="fab fa-github"></i>
+                            <span class="extended">Pydeveloper07</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Plugins -->
+    <script src="js/jquery.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/lightbox.js"></script>
+</body>
+</html>
