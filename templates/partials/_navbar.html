@@ -55,7 +55,7 @@
             <li class="nav-item">
                 {% if user.is_authenticated %}
                 <a href="javascript:{document.getElementById('logOut').submit()}" class="nav-link">Logout</a>
-                <form action="{% url 'logout' %}" action="POST" id="logOut">
+                <form action="{% url 'logout' %}" method="POST" id="logOut">
                     {% csrf_token %}
                     <input type="hidden">
                 </form>
