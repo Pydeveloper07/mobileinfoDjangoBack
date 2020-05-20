@@ -53,11 +53,23 @@
         </ul>
         <ul class="navbar-nav mr-5">
             <li class="nav-item">
-                <a href="#" class="nav-link">Login <i class="fa fa-sign-in-alt"></i></a>
+                {% if user.is_authenticated %}
+                <a href="javascript:{document.getElementById('logOut').submit()}" class="nav-link">Logout</a>
+                <form action="{% url 'logout' %}" action="POST" id="logOut">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
+                {% else %}
+                <a data-toggle="modal" data-target="#loginWindow" class="nav-link">Login <i
+                        class="fa fa-sign-in-alt"></i></a>
+                {% endif %}
             </li>
+            {% if not user.is_authenticated %}
             <li class="nav-item">
-                <a href="#" class="nav-link">Register <i class="fa fa-user-plus"></i></a>
+                <a data-toggle="modal" data-target="#registrationWindow" class="nav-link">Register <i
+                        class="fa fa-user-plus"></i></a>
             </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

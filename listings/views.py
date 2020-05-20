@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import MobilePhone, Brand
+from .models import MobilePhone, Brand, Comment
 from django.http import HttpResponse
 import json
 from django.contrib.auth.decorators import login_required

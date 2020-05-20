@@ -152,7 +152,7 @@
                         <hr>
                         <dl class="row">
                             <dt class="col-md-4 text-left">Resolution:</dt>
-                            <dd class="col-md-8 text-right">{{phone.sc_type}}}: {{phone.sc}}</dd>
+                            <dd class="col-md-8 text-right">{{phone.sc_type}}: {{phone.sc}}</dd>
                             <dt class="col-md-4 text-left">Features:</dt>
                             <dd class="col-md-8 text-right">{{phone.sc_features}}</dd>
                             <dt class="col-md-4 text-left">Video:</dt>
@@ -246,14 +246,20 @@
             </form>
         </div>
         <div class="controls">
-            <button class="btn btn-primary" id="show-comments-btn">View All (2) Comments</button>
+            <button class="btn btn-primary" id="show-comments-btn">View All (
+                {% if phone.comments %}
+                {{phone.comments.count}}
+                {% else %}
+                0 {% endif %}
+                ) Comments</button>
             <button class="btn btn-success" id="add-comment-btn">Add Comment</button>
         </div>
         <div class="comment-body mt-3">
+            {% if phone.comments.all %}
+            {% for comment in phone.comments.all %}
             <div class="comment">
-                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> John Kelly <span>Date: 02/03/2020,
-                        14:24</span></h1>
-                <p class="comment-content">It is a very cool phone! I would recommend it to everyone!</p>
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{comment.username}} <span>Date: {{comment.created_date}}</span></h1>
+                <p class="comment-content">{{comment.content}}</p>
                 <div class="comment-footer row">
                     <a href="" class="reply-link col-md-6">Reply<i class="fas fa-reply-all"></i></a>
                     <div class="col-md-6">
@@ -262,28 +268,17 @@
                     </div>
                 </div>
             </div>
-            <div class="comment comment-reply">
-                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Alisa <span>Date: 02/03/2020, 16:33</span>
-                </h1>
-                <p class="comment-content">I agree with you!</p>
-            </div>
-            <div class="comment comment-reply">
-                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Simpson <span>Date: 02/03/2020, 16:33</span>
-                </h1>
-                <p class="comment-content">Flipping is a bit annoying!</p>
-            </div>
-            <div class="comment">
-                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> Robert <span>Date: 02/03/2020,
-                        14:24</span></h1>
-                <p class="comment-content">It hasn't been much since I bought it. Working perfectly!</p>
-                <div class="comment-footer row">
-                    <a href="" class="reply-link col-md-6">Reply<i class="fas fa-reply-all"></i></a>
-                    <div class="col-md-6">
-                        <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
-                        <a href="" class="dislike"><i class="far fa-thumbs-down"></i></a>
-                    </div>
+            {% if comment.replies.all %}
+                {% for reply in comment.replies.all %}
+                <div class="comment comment-reply">
+                    <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{reply.username}} <span>{{reply.created_date}}</span>
+                    </h1>
+                    <p class="comment-content">{{reply.content}}</p>
                 </div>
-            </div>
+                {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 

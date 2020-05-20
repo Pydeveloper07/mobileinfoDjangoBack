@@ -113,7 +113,8 @@ class Comment(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="comments", null=True)
     phone_id = models.ForeignKey(MobilePhone, on_delete=models.CASCADE, related_name="comments")
     reply_id = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies")
-    content = models.TextField()
+    content = models.TextField(default=None, null=True)
+    created_date = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
 

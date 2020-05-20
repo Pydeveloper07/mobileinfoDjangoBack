@@ -16,6 +16,7 @@
     <div class="caption">
         <h1>WELCOME TO <strong>MOBILE WORLD</strong></h1>
         <a href="#about" class="start-now-btn">START NOW</a>
+        {% include 'partials/_alerts.html' %}
     </div>
 </section>
 
@@ -77,7 +78,7 @@
                                         </dl>
                                     </div>
                                     <div class="col-md-12 more-info">
-                                        <a href="#">More Info</a>
+                                        <a href="{% url 'listing' listing_id=phone.id %}">More Info</a>
                                     </div>
                                 </div>
                             </div>
