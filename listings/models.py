@@ -111,13 +111,13 @@ class MobilePhone(models.Model):
 
 class Comment(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="comments", null=True)
-    phone_id = models.ForeignKey(MobilePhone, on_delete=models.CASCADE, related_name="comments")
-    reply_id = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies")
+    phone_id = models.ForeignKey(MobilePhone, on_delete=models.CASCADE, related_name="comments", null=True)
+    reply_id = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies", null=True, default=None)
     content = models.TextField(default=None, null=True)
     created_date = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.id
+        return str(self.created_date)
 

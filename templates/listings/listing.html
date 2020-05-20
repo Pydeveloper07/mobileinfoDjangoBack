@@ -231,20 +231,7 @@
         </div>
     </section>
     <div id="comments" class="mb-4">
-        <div class="screen-overlay">
-            <form action="listing.html" class="add-comment-form" method="POST">
-                <h1>Add Comment</h1>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="comment" cols="30" rows="2"
-                        placeholder="Your comment..."></textarea>
-                </div>
-                <input type="submit" value="Add Comment" class="btn btn-primary">
-                <span id="exit">X</span>
-            </form>
-        </div>
+        {% include 'partials/_comment_modal.html' %}
         <div class="controls">
             <button class="btn btn-primary" id="show-comments-btn">View All (
                 {% if phone.comments %}
@@ -252,16 +239,18 @@
                 {% else %}
                 0 {% endif %}
                 ) Comments</button>
-            <button class="btn btn-success" id="add-comment-btn">Add Comment</button>
+            <button class="btn btn-success" id="add-comment-btn" data-toggle="modal" data-target="#commentWindow">Add
+                Comment</button>
         </div>
         <div class="comment-body mt-3">
             {% if phone.comments.all %}
             {% for comment in phone.comments.all %}
             <div class="comment">
-                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{comment.username}} <span>Date: {{comment.created_date}}</span></h1>
+                <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{comment.user_name}} <span>Date: {{comment.created_date}}</span></h1>
                 <p class="comment-content">{{comment.content}}</p>
                 <div class="comment-footer row">
-                    <a href="" class="reply-link col-md-6">Reply<i class="fas fa-reply-all"></i></a>
+                    <a data-toggle="modal" data-target="#commentWindow" class="reply-link col-md-6" id="reply" data-id="{{comment.id}}">Reply<i
+                            class="fas fa-reply-all"></i></a>
                     <div class="col-md-6">
                         <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
                         <a href="" class="dislike"><i class="far fa-thumbs-down"></i></a>
@@ -284,4 +273,15 @@
 
 </div>
 
+{% endblock %}
+{% block javascript %}
+<script>
+    $('.reply-link').on('click', function(){
+        var commentId = $(this).attr('data-id');
+        $('#replyId').val(commentId);
+    });
+    $('#add-comment-btn').on('click', function(){
+        $('#replyId').val("");
+    });
+</script>
 {% endblock %}

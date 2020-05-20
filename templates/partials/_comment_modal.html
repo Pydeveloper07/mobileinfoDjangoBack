@@ -1,0 +1,29 @@
+<div class="modal comment-modal fade" id="commentWindow" tabindex="-1" role="dialog"
+    aria-labelledby="commentWindowTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content position-relative">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Comment Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'comment' %}" method="POST" id="commentForm">
+                    {% csrf_token %}
+                    <h4 class="text-center text-uppercase text-primary">Add Comment</h4>
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" name="name" value="{{user.username}}" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="content" cols="30" rows="3"
+                            placeholder="Your comment..." required></textarea>
+                    </div>
+                    <input type="hidden" name="phone_id" value="{{phone.id}}">
+                    <input type="hidden" name="reply_id" value="" id="replyId">
+                    <input type="submit" value="Add Comment" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

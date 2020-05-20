@@ -568,6 +568,9 @@ footer .vcenter{
 #listing img{
     width:100%;
 }
+#listing .thumb img{
+    max-width:100% !important;
+}
 .content-listing .category .label{
     background:rgb(226, 222, 222);
     padding:0.5em;

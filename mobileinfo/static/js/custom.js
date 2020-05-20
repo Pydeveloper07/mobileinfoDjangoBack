@@ -42,12 +42,6 @@ jQuery(document).ready(function(){
         $('#show-comments-btn').click(function(){
             $(".comment-body").fadeIn(500);
         });
-        $('#exit').click(function () {
-            $(".screen-overlay").fadeOut(500);
-        });
-        $('#add-comment-btn').click(function () {
-            $(".screen-overlay").fadeIn(500);
-        });
     } catch (error) {
         console.log(error.message);
     }
