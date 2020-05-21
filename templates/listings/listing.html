@@ -286,6 +286,7 @@
     $('.comment .like').on('click', function(){
         var likeCountSpan = $(this).siblings('.numOfLikes');
         var commentId = $(this).closest('.comment').attr('data-id');
+        var element = $(this).find('svg');
         $.ajax({
             type: "POST",
             url: "{% url 'like_comment' %}",
@@ -300,6 +301,12 @@
                 }
                 else{
                     likeCountSpan.text(response.numOfLikes.toString());
+                    if (response.like){
+                        element.attr('data-prefix', 'fas');
+                    }
+                    else{
+                        element.attr('data-prefix', 'far');
+                    }
                 }
             },
             error: function(response){

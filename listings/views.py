@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import MobilePhone, Brand, Comment, PhoneReviews, CommentLikes
+from .models import MobilePhone, Brand, Comment, PhoneReviews, CommentLikes, PhoneLikes
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import json
@@ -39,19 +39,24 @@ def add_comment(request):
         comment.save()
         return redirect('listing', phone_id)
 
-@login_required
 def like(request):
     if request.method == 'POST':
-        id = request.POST.get('id')
+        if not request.user.is_authenticated:
+            context = {
+                'login_needed': True,
+            }
+            return HttpResponse(json.dumps(context), content_type='applications/json')
+        id = request.POST['id']
         phone = get_object_or_404(MobilePhone, id=id)
-        if phone:
-           phone.likes += 1
-           phone.save()
-    
+        new, created = PhoneLikes.objects.get_or_create(username=request.user, phone_id=phone)
         context = {
-            'likes': phone.likes,
-            'id': phone.id,
+            'login_needed': False,
+            'like': True,
         }
+        if not created:
+            PhoneLikes.objects.get(username=request.user, phone_id=phone).delete()
+            context['like'] = False
+        context['numOfLikes'] = phone.likes.count()
         return HttpResponse(json.dumps(context), content_type='applications/json')
 
 def like_comment(request):
@@ -64,8 +69,12 @@ def like_comment(request):
         id = request.POST['comment_id']
         comment = get_object_or_404(Comment,id=id)
         new, created = CommentLikes.objects.get_or_create(username=request.user, comment_id=comment)
-        context = {'login_needed': False}
+        context = {
+            'login_needed': False,
+            'like': True,
+            }
         if not created:
             CommentLikes.objects.get(username=request.user, comment_id=comment).delete()
+            context['like'] = False
         context['numOfLikes'] = comment.likes.count()
         return HttpResponse(json.dumps(context), content_type='applications/json')

@@ -136,8 +136,8 @@
                             <span class="badge badge-danger">${{phone.price|intcomma}}</span>
                             <div class="card-body">
                                 <div class="stats">
-                                    <span class="far fa-heart text-danger" id="like" aria-hidden="true"
-                                        data-phoneId="{{phone.id}}"></span><span id="likes_{{phone.id}}">{{phone.likes.all.count}}</span>
+                                    <span class="far fa-heart text-danger like" aria-hidden="true" data-phoneId="{{phone.id}}"></span>
+                                    <span class="numOfLikes">{{phone.likes.all.count}}</span>
                                     <i class="fa fa-eye text-primary" id="review"></i>{{phone.reviews.all.count}} <i class="far fa-comment" id="comment"></i>{{phone.comments.count}}
                                 </div>
                                 <hr class="mt-0">
@@ -206,26 +206,34 @@
 </div>
 {% endblock %}
 {% block javascript %}
-<!-- <script>
-    $(document).on('click', '#like', function(){
+<script>
+    $(document).on('click', '.like', function(){
+        var numOfLikeSpan = $(this).siblings('.numOfLikes');
+        var phoneId = $(this).attr('data-phoneId');
+        var element = $(this);
         $.ajax({
             type: "POST",
             url: "{% url 'like' %}",
             data: {
-                'id': $(this).attr('data-phoneId'),
-                'csrfmiddlewaretoken': '{{csrf_token}}',
+                'id': phoneId,
+                'csrfmiddlewaretoken': "{{csrf_token}}",
             },
             dataType: 'json',
             success: function(response){
-                change_type(response);
+                if (response.login_needed){
+                    $('#loginButton').click();
+                }
+                else{
+                    numOfLikeSpan.text(response.numOfLikes.toString());
+                    if (response.like){
+                        element.attr('data-prefix', 'fas');
+                    }
+                    else{
+                        element.attr('data-prefix', 'far');
+                    }
+                }
             },
         });
-        var id = $(this).attr('data-phoneId');
-        var element = $(this)
-        function change_type(response){
-            $('#likes_' + id).text(response.likes);
-            element.attr('class', 'fas fa-heart text-danger');
-        }
     });
-</script> -->
+</script>
 {% endblock %}
