@@ -6,4 +6,5 @@ urlpatterns = [
     path('<int:listing_id>/', views.listing, name='listing'),
     path('like/', views.like, name='like'),
     path('comment/', views.add_comment, name="comment"),
+    path('like_comment/', views.like_comment, name="like_comment"),
 ]

@@ -245,17 +245,15 @@
         <div class="comment-body mt-3">
             {% if phone.comments.all %}
             {% for comment in phone.comments.all %}
-            <div class="comment">
+            <div class="comment" data-id="{{comment.id}}">
                 <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{comment.user_name}} <span>Date: {{comment.created_date}}</span></h1>
                 <p class="comment-content">{{comment.content}}</p>
                 <div class="comment-footer row">
                     <a data-toggle="modal" data-target="#commentWindow" class="reply-link col-md-6" id="reply" data-id="{{comment.id}}">Reply<i
                             class="fas fa-reply-all"></i></a>
                     <div class="col-md-6">
-                        <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
-                        {% if comment.likes.count %}
-                        <span class="badge badge-info" style="font-size:0.5em">{{comment.likes.count}}</span>
-                        {% endif %}
+                        <a class="like text-primary" style="cursor:pointer"><i class="far fa-thumbs-up"></i></a>
+                        <span class="badge badge-info numOfLikes" style="font-size:0.5em">{{comment.likes.count}}</span>
                     </div>
                 </div>
             </div>
@@ -284,6 +282,30 @@
     });
     $('#add-comment-btn').on('click', function(){
         $('#replyId').val("");
+    });
+    $('.comment .like').on('click', function(){
+        var likeCountSpan = $(this).siblings('.numOfLikes');
+        var commentId = $(this).closest('.comment').attr('data-id');
+        $.ajax({
+            type: "POST",
+            url: "{% url 'like_comment' %}",
+            data: {
+                "comment_id": commentId,
+                'csrfmiddlewaretoken':"{{ csrf_token }}",
+            },
+            dataType: "json",
+            success: function(response){
+                if (response.login_needed){
+                    $('#loginButton').click();
+                }
+                else{
+                    likeCountSpan.text(response.numOfLikes.toString());
+                }
+            },
+            error: function(response){
+                console.log('Error');
+            },
+        });
     });
 </script>
 {% endblock %}

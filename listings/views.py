@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import MobilePhone, Brand, Comment, PhoneReviews
+from .models import MobilePhone, Brand, Comment, PhoneReviews, CommentLikes
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import json
@@ -52,4 +52,20 @@ def like(request):
             'likes': phone.likes,
             'id': phone.id,
         }
+        return HttpResponse(json.dumps(context), content_type='applications/json')
+
+def like_comment(request):
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            context = {
+                'login_needed': True,
+            }
+            return HttpResponse(json.dumps(context), content_type='applications/json')
+        id = request.POST['comment_id']
+        comment = get_object_or_404(Comment,id=id)
+        new, created = CommentLikes.objects.get_or_create(username=request.user, comment_id=comment)
+        context = {'login_needed': False}
+        if not created:
+            CommentLikes.objects.get(username=request.user, comment_id=comment).delete()
+        context['numOfLikes'] = comment.likes.count()
         return HttpResponse(json.dumps(context), content_type='applications/json')
