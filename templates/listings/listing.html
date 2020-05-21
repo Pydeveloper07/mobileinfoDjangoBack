@@ -253,7 +253,9 @@
                             class="fas fa-reply-all"></i></a>
                     <div class="col-md-6">
                         <a href="" class="like"><i class="far fa-thumbs-up"></i></a>
-                        <a href="" class="dislike"><i class="far fa-thumbs-down"></i></a>
+                        {% if comment.likes.count %}
+                        <span class="badge badge-info" style="font-size:0.5em">{{comment.likes.count}}</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -104,10 +104,17 @@ class MobilePhone(models.Model):
     # Phone of the week
     is_wkp = models.BooleanField(verbose_name='Is Phone of the week?', default=False)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    likes = models.IntegerField(default=0, editable=False)
 
     def __str__(self):
         return self.name
+
+class PhoneLikes(models.Model):
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    phone_id = models.ForeignKey(MobilePhone, on_delete=models.CASCADE, related_name="likes")
+
+class PhoneReviews(models.Model):
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    phone_id = models.ForeignKey(MobilePhone, on_delete=models.CASCADE, related_name="reviews")
 
 class Comment(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="comments", null=True)
@@ -115,9 +122,10 @@ class Comment(models.Model):
     reply_id = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies", null=True, default=None)
     content = models.TextField(default=None, null=True)
     created_date = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.created_date)
 
+class CommentLikes(models.Model):
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="likes")

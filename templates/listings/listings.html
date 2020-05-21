@@ -137,8 +137,8 @@
                             <div class="card-body">
                                 <div class="stats">
                                     <span class="far fa-heart text-danger" id="like" aria-hidden="true"
-                                        data-phoneId="{{phone.id}}"></span><span id="likes_{{phone.id}}">{{phone.likes}}</span>
-                                    <i class="fa fa-eye text-primary" id="review"></i>3152 <i class="far fa-comment" id="comment"></i>8
+                                        data-phoneId="{{phone.id}}"></span><span id="likes_{{phone.id}}">{{phone.likes.all.count}}</span>
+                                    <i class="fa fa-eye text-primary" id="review"></i>{{phone.reviews.all.count}} <i class="far fa-comment" id="comment"></i>{{phone.comments.count}}
                                 </div>
                                 <hr class="mt-0">
                                 <h1 class="card-title">{{phone.name}}</h1>
@@ -195,7 +195,7 @@
                 <div class="card-body">
                     <h6 class="card-title">{{wk_phone.name}}</h6>
                     <p class="sub-card-title">
-                        1512 <i class="fas fa-heart"></i> <strong>&</strong> 3156 <i class="far fa-eye"></i>
+                        {{wk_phone.likes.all.count}} <i class="fas fa-heart"></i> <strong>&</strong> {{wk_phone.reviews.all.count}} <i class="far fa-eye"></i>
                     </p>
                     <a href="{% url 'listing' listing_id=wk_phone.id %}" class="explore">Explore</a>
                 </div>

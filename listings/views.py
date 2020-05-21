@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import MobilePhone, Brand, Comment
+from .models import MobilePhone, Brand, Comment, PhoneReviews
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import json
@@ -17,6 +17,8 @@ def listings(request):
 
 def listing(request, listing_id):
     phone = get_object_or_404(MobilePhone, pk=listing_id)
+    if request.user.is_authenticated:
+        new_review, old_review = PhoneReviews.objects.get_or_create(username=request.user, phone_id=MobilePhone.objects.get(id=listing_id))
     context = {
         'phone':phone,
     }
@@ -29,8 +31,6 @@ def add_comment(request):
         username = request.POST['name']
         content = request.POST['content']
         comment = Comment.objects.create(content=content)
-        # user = User.objects.get(username=username)
-        # phone = MobilePhone.objects.get(id=phone_id)
         comment.user_name = User.objects.get(username=username)
         comment.phone_id = MobilePhone.objects.get(id=phone_id)
         if request.POST['reply_id']:
