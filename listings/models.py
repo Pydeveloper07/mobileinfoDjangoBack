@@ -52,7 +52,7 @@ class MobilePhone(models.Model):
     multitouch = models.BooleanField(default=True)
     # Body
     dimensions = models.CharField(max_length=100, blank=True, null=True)
-    weight = models.IntegerField()
+    weight = models.IntegerField(default=None, null=True, blank=True)
     sim = models.CharField(max_length=50, blank=True, null=True)
     # Memory
     ram = models.CharField(validators=[int_list_validator], max_length=100, null=True, blank=True)
@@ -103,7 +103,7 @@ class MobilePhone(models.Model):
     photo_6 = models.ImageField(upload_to=image_upload_path, blank=True)
     # Phone of the week
     is_wkp = models.BooleanField(verbose_name='Is Phone of the week?', default=False)
-    description = models.TextField(max_length=2000, blank=True, null=True)
+    description = models.TextField(max_length=5000, blank=True, null=True)
 
     def __str__(self):
         return self.name

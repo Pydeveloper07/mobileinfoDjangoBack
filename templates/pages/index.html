@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% load humanize %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -33,69 +39,48 @@
 
 <section id="upcoming-phones">
     <h1>Upcoming&New</h1>
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                    {% for phone in upcoming_phones %}
-                    <div class="col-lg-4 col-md-4">
-                        <div class="card">
-                            <img src="{{ phone.photo_main.url }}" class="card-img-top" alt="...">
-                            <h2 class="img-overlay">
-                                <span class="badge badge-primary text-white">${{phone.price|intcomma}}</span>
-                            </h2>
-                            <div class="card-body">
-                                <h5 class="card-title">{{phone.name}}</h5>
-                                <hr>
-                                <div class="row" style="text-align:left">
-                                    <div class="col-md-6">
-                                        <dl>
-                                            <dt>Announced:</dt>
-                                            <dd>{{phone.announced_date}}</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <dl>
-                                            <dt>Resolution:</dt>
-                                            <dd>{{phone.display_resolution}}</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <dl>
-                                            <dt>Weight:</dt>
-                                            <dd>{{phone.weight}} g</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <dl>
-                                            <dt>OS:</dt>
-                                            <dd>{{phone.os}}</dd>
-                                        </dl>
-                                    </div>
-                                    <div class="col-md-12 more-info">
-                                        <a href="{% url 'listing' listing_id=phone.id %}">More Info</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="owl-carousel owl-theme">
+        {% for phone in upcoming_phones %}
+        <div class="card">
+            <img src="{{ phone.photo_main.url }}" class="card-img-top img-responsive" alt="...">
+            <h2 class="img-overlay">
+                <span class="badge badge-primary text-white">${{phone.price|intcomma}}</span>
+            </h2>
+            <div class="card-body">
+                <h5 class="card-title">{{phone.name}}</h5>
+                <hr>
+                <div class="row" style="text-align:left">
+                    <div class="col-md-6 col-sm-12">
+                        <dl>
+                            <dt>Announced:</dt>
+                            <dd>{{phone.announced_date}}</dd>
+                        </dl>
                     </div>
-                    {% endfor %}
+                    <div class="col-md-6 col-sm-12">
+                        <dl>
+                            <dt>Resolution:</dt>
+                            <dd>{{phone.display_resolution}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <dl>
+                            <dt>Weight:</dt>
+                            <dd>{{phone.weight}} g</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <dl>
+                            <dt>OS:</dt>
+                            <dd>{{phone.os}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-12 more-info">
+                        <a href="{% url 'listing' listing_id=phone.id %}">More Info</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        {% endfor %}
     </div>
 </section>
 
@@ -154,4 +139,36 @@
     </div>
 </section>
 
+{% endblock %}
+{% block javascript %}
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin:10,
+            autoplay: false,
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true,
+            responsiveClass:true,
+            autoHeight: false,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:2,
+                    nav:true
+                },
+                    1000:{
+                    items:3,
+                    nav:true,
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}

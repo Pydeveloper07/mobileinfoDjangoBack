@@ -78,3 +78,131 @@ def like_comment(request):
             context['like'] = False
         context['numOfLikes'] = comment.likes.count()
         return HttpResponse(json.dumps(context), content_type='applications/json')
+
+def search(request):
+    phones = MobilePhone.objects.all()
+    brand = city = state = ''
+    weight = ram = storage = price = 0
+
+    # Filtering by brand
+    if 'brand' in request.POST:
+        if request.POST['brand']:
+            brand = str(request.POST['brand']).lower().capitalize()
+            phones = phones.filter(brand__exact=brand)
+    
+    # Filtering by price
+    if 'price' in request.POST:
+        if request.POST['price']:
+            price = int(request.POST['price'])
+            if price == 900:
+                phones = phones.filter(price__gte=price)
+            else:
+                phones = phones.filter(price__lte=price)
+
+    # Filtering by weight            
+    if 'weight' in request.POST:
+        if request.POST['weight']:
+            phones = phones.filter(weight__lte=request.POST['weight'])
+
+    # Filtering by RAM
+    if 'ram' in request.POST:
+        if request.POST['ram']:
+            ram = int(request.POST['ram'])
+            if ram == 10:
+                for phone in phones:
+                    if ',' in phone.ram:
+                        rams = str(phone.ram).split(',')
+                        is_exist = False
+                        for r in rams:
+                            if int(r) >= ram:
+                                is_exist = True
+                        if not is_exist:
+                            phones = phones.exclude(ram=phone.ram)
+                    else:
+                        if int(phone.ram) < ram:
+                            phones = phones.exclude(ram=phone.ram)
+            else:
+                for phone in phones:
+                    if ',' in phone.ram:
+                        rams = str(phone.ram).split(',')
+                        is_exist = False
+                        for r in rams:
+                            if int(r) == ram:
+                                is_exist = True
+                        if not is_exist:
+                            phones = phones.exclude(ram=phone.ram)
+                    else:
+                        if int(phone.ram) != ram:
+                            phones = phones.exclude(ram=phone.ram)
+
+    # Filtering by Storage
+    if 'storage' in request.POST:
+        if request.POST['storage']:
+            storage = int(request.POST['storage'])
+            if storage == 512:
+                for phone in phones:
+                        if ',' in phone.storage:
+                            storages = str(phone.storage).split(',')
+                            is_exist = False
+                            for s in storages:
+                                if int(s) >= storage:
+                                    is_exist = True
+                            if not is_exist:
+                                phones = phones.exclude(storage=phone.storage)
+                        else:
+                            if int(phone.storage) < storage:
+                                phones = phones.exclude(storage=phone.storage)
+            else:
+                for phone in phones:
+                    if ',' in phone.storage:
+                        storages = str(phone.storage).split(',')
+                        is_exist = False
+                        for s in storages:
+                            if int(s) == storage:
+                                is_exist = True
+                        if not is_exist:
+                            phones = phones.exclude(storage=phone.storage)
+                    else:
+                        if int(phone.storage) != storage:
+                            phones = phones.exclude(storage=phone.storage)
+    
+    # Filtering by CPU
+    if 'cpu' in request.POST:
+        if request.POST['cpu']:
+            phones = phones.filter(cpu_type__iexact=request.POST['cpu'])
+
+    # Filtering by Selfie Camera
+    if 'selfie_camera' in request.POST:
+        if request.POST['selfie_camera']:
+            selfie_camera = request.POST['selfie_camera']
+            if selfie_camera == 'triple':
+                phones = phones.filter(sc_type='triple').filter(sc_type='triple+')
+            else:
+                phones = phones.filter(sc_type__iexact=selfie_camera)
+    
+    # Filtering by Main Camera
+    if 'main_camera' in request.POST:
+        if request.POST['main_camera']:
+            main_camera = request.POST['main_camera']
+            if main_camera == 'triple':
+                phones = phones.filter(mc_type='triple').filter(mc_type='triple+')
+            else:
+                phones = phones.filter(mc_type__exact=main_camera)
+
+    # Filtering by Battery Capacity
+    if 'battery' in request.POST:
+        if request.POST['battery']:
+            battery = int(request.POST['battery'])
+            if battery == 1000:
+                phones = phones.exclude(battery_capacity__gt=battery+1000)
+            elif battery == 2000:
+                phones = phones.exclude(battery_capacity__lte=battery).exclude(battery_capacity__gt=battery+1000)
+            elif battery == 3000:
+                phones = phones.exclude(battery_capacity__lte=battery).exclude(battery_capacity__gt=battery+1000) 
+            elif battery == 4000:
+                phones = phones.filter(battery_capacity__gt=battery)
+    
+    context = {
+        'phones': phones,
+    }
+    return render(request, 'pages/search.html', context)

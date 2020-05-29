@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    {% block style %}
+    {% endblock %}
 </head>
 <body>
     {% include 'partials/_navbar.html' %}

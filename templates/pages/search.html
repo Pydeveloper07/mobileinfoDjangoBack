@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+<div class="content" style="margin-left:0">
+    {% include 'partials/_search.html' %}
+    <section class="section container mb-5">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home"></i><a href="{% url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'listings' %}">Featured Listings</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+            </ol>
+        </nav>
+        <div class="row mt-3">
+            {% if phones %}
+            {% for phone in phones %}
+            <div class="item col-md-6 col-lg-4 col-sm-6 mt-3">
+                <div class="card">
+                    <img src="{{phone.photo_main.url}}" alt="..." class="card-image-top">
+                    <hr class="m-0">
+                    <span class="badge badge-danger">${{phone.price|intcomma}}</span>
+                    <div class="card-body">
+                        <div class="stats">
+                            <span class="far fa-heart text-danger like" aria-hidden="true" data-phoneId="{{phone.id}}"></span>
+                            <span class="numOfLikes">{{phone.likes.all.count}}</span>
+                            <i class="fa fa-eye text-primary" id="review"></i>{{phone.reviews.all.count}} <i class="far fa-comment" id="comment"></i>{{phone.comments.count}}
+                        </div>
+                        <hr class="mt-0">
+                        <h1 class="card-title">{{phone.name}}</h1>
+                        <hr>
+                        <div class="row text-left">
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>Announced:</dt>
+                                    <dd>{{phone.announced_date}}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>Resolution:</dt>
+                                    <dd>{{phone.display_resolution}}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>Weight:</dt>
+                                    <dd>{{phone.weight}} g</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>OS:</dt>
+                                    <dd>{{phone.os}}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-12 more-info">
+                                <a href="{% url 'listing' listing_id=phone.id %}">More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h2 class="text-center text-primary text-uppercase" style="height:50vh">No results found:(</h2>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).on('click', '.like', function () {
+        var numOfLikeSpan = $(this).siblings('.numOfLikes');
+        var phoneId = $(this).attr('data-phoneId');
+        var element = $(this);
+        $.ajax({
+            type: "POST",
+            url: "{% url 'like' %}",
+            data: {
+                'id': phoneId,
+                'csrfmiddlewaretoken': "{{csrf_token}}",
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.login_needed) {
+                    $('#loginButton').click();
+                } else {
+                    numOfLikeSpan.text(response.numOfLikes.toString());
+                    if (response.like) {
+                        element.attr('data-prefix', 'fas');
+                    } else {
+                        element.attr('data-prefix', 'far');
+                    }
+                }
+            },
+        });
+    });
+</script>
+{% endblock %}
