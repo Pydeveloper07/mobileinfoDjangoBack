@@ -13,7 +13,7 @@ html, body{
     height:100%;
     text-align:center;
     background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-       url(/images/background/home_bg.jpg) no-repeat center;
+       url(../images/background/home_bg.jpg) no-repeat center;
     background-size: cover;
     opacity: 0.95;
 }
@@ -36,9 +36,9 @@ html, body{
     transition: background 0.5s;
     padding:0.7em 1em;
     margin-top:4%;
-    border-color:blue;
     color:white;
     font-weight:bold;
+    text-decoration:none;
 }
 #home .caption .start-now-btn:hover{
     background:rgba(0, 102, 255, 1);
@@ -47,7 +47,7 @@ html, body{
 #upcoming-phones{
     padding: 3em 5em;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(/images/background/upcoming.jpg);
+    url(../images/background/upcoming.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -94,15 +94,9 @@ html, body{
 #contact-form textarea{
     height:5.7em;
 }
-.carousel-control-prev{
-    left: -8%;  
-}
-.carousel-control-next{
-    right:-5%;
-}
 .card img{
     width:90%;
-    height:250px;
+    height:50%;
     margin:auto;
 }
 .card .more-info{
@@ -134,6 +128,10 @@ html, body{
     color:black;
     border-radius:20px;
     padding:1em;
+    height:100% !important;
+}
+.owl-stage{
+    display:flex;
 }
 .card h2.img-overlay{
     display:inline-block;
@@ -148,9 +146,9 @@ html, body{
     padding: 0.4em 1em;
 }
 #about{
-    padding: 8em 15em;
+    padding: 8em 10%;
     text-align:center;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/background/about_bg.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/background/about_bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -218,6 +216,9 @@ h1{
 .custom-nav .nav-link:hover,
 .custom-nav .navbar-brand:hover{
     color:lightblue;
+}
+.navbar-nav .active .nav-link{
+    color: lightblue !important;
 }
 .navbar-toggler {
     border: 2px solid white !important;
@@ -304,6 +305,7 @@ footer{
     border-top: 5px solid red;
     padding: 0.3em;
     width:100%;
+    overflow:hidden;
 }
 footer .social-link{
     text-decoration:none;
@@ -561,7 +563,10 @@ footer .vcenter{
 #listing img{
     width:100%;
 }
-.content-listing .category .label{
+#listing .thumb img{
+    max-width:100% !important;
+}
+.content-listing .category .label{ 
     background:rgb(226, 222, 222);
     padding:0.5em;
     font-weight:bold;

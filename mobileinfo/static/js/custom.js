@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
         console.log(error.message);
     }
     if ($('#messages')) {
-        $('#messages').fadeOut(3000);
+        $('#messages').fadeOut(5000);
     }
     var elem = $('.custom-nav');
     $(window).resize(function(){

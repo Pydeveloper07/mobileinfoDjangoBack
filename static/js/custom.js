@@ -1,10 +1,19 @@
 // Preloader
 jQuery(window).load(function () {
-    $('#load').delay(500).fadeOut('slow');
-    $('#preloader').delay(900).fadeOut('slow');
-    $('body').delay(900).css({
-        'overflow': 'visible',
-    });
+    function Preloader() {
+        $('#load').delay(500).fadeOut('slow');
+        $('#preloader').delay(900).fadeOut('slow');
+        $('body').delay(900).css({
+            'overflow': 'visible',
+        });
+    }
+    if (!sessionStorage.getItem('doNotShow')) {
+        sessionStorage.setItem('doNotShow', true);
+        Preloader();
+    } else {
+        $('#load, #preloader').hide();
+    }
+    
 });
 jQuery(document).ready(function(){
     try {
@@ -33,14 +42,11 @@ jQuery(document).ready(function(){
         $('#show-comments-btn').click(function(){
             $(".comment-body").fadeIn(500);
         });
-        $('#exit').click(function () {
-            $(".screen-overlay").fadeOut(500);
-        });
-        $('#add-comment-btn').click(function () {
-            $(".screen-overlay").fadeIn(500);
-        });
     } catch (error) {
         console.log(error.message);
+    }
+    if ($('#messages')) {
+        $('#messages').fadeOut(5000);
     }
     var elem = $('.custom-nav');
     $(window).resize(function(){
