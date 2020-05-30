@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'mobileinfo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mobilephones',
+        'NAME': 'blacktiger0711$mobilephones',
         'USER': 'blacktiger0711',
         'PASSWORD': 'inhahero07!',
         'HOST': 'blacktiger0711.mysql.pythonanywhere-services.com',
