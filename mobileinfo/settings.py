@@ -82,14 +82,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mobilephones',
-        'USER': 'root',
+        'USER': 'blacktiger0711',
         'PASSWORD': 'inhahero07!',
-        'HOST': 'localhost',
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'mobileinfo',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'black_tiger07!',
-        # 'HOST': 'localhost',
+        'HOST': 'blacktiger0711.mysql.pythonanywhere-services.com',
     }
 }
 
