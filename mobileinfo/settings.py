@@ -80,11 +80,16 @@ WSGI_APPLICATION = 'mobileinfo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mobileinfo',
-        'USER': 'postgres',
-        'PASSWORD': 'black_tiger07!',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mobilephones',
+        'USER': 'root',
+        'PASSWORD': 'inhahero07!',
         'HOST': 'localhost',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'mobileinfo',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'black_tiger07!',
+        # 'HOST': 'localhost',
     }
 }
 
