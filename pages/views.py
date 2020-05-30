@@ -24,8 +24,8 @@ def send_email(request):
         if email and message:
             try:
                 send_mail(
-                    "From: " + email + "\n" + subject, 
-                    message, 
+                    subject, 
+                    'From: {0}\nEmail: {1}\n{2}'.format(name, email, message), 
                     'blacktigerno1ever@gmail.com', 
                     ['inha07111999@gmail.com'],
                     fail_silently=False
@@ -36,7 +36,7 @@ def send_email(request):
                 messages.error(request, "Invalid header found!")
                 return redirect('index')
             except:
-                messages.error(request, "Something went wrong try again")
+                messages.error(request, "Something went wrong. Try again!")
                 return redirect('index')
         else:
             messages.error(request, "Make sure you provided email and you message!")
