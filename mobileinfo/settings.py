@@ -26,7 +26,7 @@ SECRET_KEY = '2ki21t$n2x3)^ldc!iqw=+qkn4#=xhy7*h*b)fy&(wc546@pj1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blacktiger0711.pythonanywhere.com']
+ALLOWED_HOSTS = ['blacktiger0711.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -80,12 +80,19 @@ WSGI_APPLICATION = 'mobileinfo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blacktiger0711$mobilephones',
-        'USER': 'blacktiger0711',
-        'PASSWORD': 'inhahero07!',
-        'HOST': 'blacktiger0711.mysql.pythonanywhere-services.com',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mobileinfo',
+        'USER': 'postgres',
+        'PASSWORD': 'black_tiger07!',
+        'HOST': 'localhost',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'blacktiger0711$mobilephones',
+    #     'USER': 'blacktiger0711',
+    #     'PASSWORD': 'inhahero07!',
+    #     'HOST': 'blacktiger0711.mysql.pythonanywhere-services.com',
+    # }
 }
 
 

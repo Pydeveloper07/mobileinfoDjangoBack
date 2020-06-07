@@ -25,7 +25,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="row">
                     {% if phone.photo_1 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_1.url}}" data-lightbox="phone-images"
                             alt="...">
                             <img src="{{phone.photo_1.url}}" alt="...">
@@ -33,35 +33,35 @@
                     </div>
                     {% endif %}
                     {% if phone.photo_2 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_2.url}}" data-lightbox="phone-images" alt="...">
                             <img src="{{phone.photo_2.url}}" alt="...">
                         </a>
                     </div>
                     {% endif %}
                     {% if phone.photo_3 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_3.url}}" data-lightbox="phone-images" alt="...">
                             <img src="{{phone.photo_3.url}}" alt="...">
                         </a>
                     </div>
                     {% endif %}
                     {% if phone.photo_4 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_4.url}}" data-lightbox="phone-images" alt="...">
                             <img src="{{phone.photo_4.url}}" alt="...">
                         </a>
                     </div>
                     {% endif %}
                     {% if phone.photo_5 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_5.url}}" data-lightbox="phone-images" alt="...">
                             <img src="{{phone.photo_5.url}}" alt="...">
                         </a>
                     </div>
                     {% endif %}
                     {% if phone.photo_6 %}
-                    <div class="col-md-4 col-lg-4 thumb">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 thumb">
                         <a href="{{phone.photo_6.url}}" data-lightbox="phone-images" alt="...">
                             <img src="{{phone.photo_6.url}}" alt="...">
                         </a>
@@ -243,8 +243,8 @@
                 Comment</button>
         </div>
         <div class="comment-body mt-3">
-            {% if phone.comments.all %}
-            {% for comment in phone.comments.all %}
+            {% if comments %}
+            {% for comment in comments %}
             <div class="comment" data-id="{{comment.id}}">
                 <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{comment.user_name}} <span>Date: {{comment.created_date}}</span></h1>
                 <p class="comment-content">{{comment.content}}</p>
@@ -260,7 +260,7 @@
             {% if comment.replies.all %}
                 {% for reply in comment.replies.all %}
                 <div class="comment comment-reply">
-                    <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{reply.username}} <span>{{reply.created_date}}</span>
+                    <h1 class="user-name pl-3"><i class="fas fa-user-tag"></i> {{reply.user_name}} <span>{{reply.created_date}}</span>
                     </h1>
                     <p class="comment-content">{{reply.content}}</p>
                 </div>
@@ -272,8 +272,12 @@
     </div>
 
 </div>
-
+<!-- Footer -->
+{% include 'partials/_footer.html' %}
 {% endblock %}
+
+
+
 {% block javascript %}
 <script>
     $('.reply-link').on('click', function(){

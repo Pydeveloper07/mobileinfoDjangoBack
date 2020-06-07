@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="row" style="margin:0; padding:0;">
-    <div class="side-menu col-md-2 col-lg-2">
+    <div class="side-menu col-md-3 col-sm-3 col-lg-2">
         <div class="caption">
             <h5>Choose your company</h5>
         </div>
@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="content col-md-8 col-lg-8">
+    <div class="content col-md-9 col-sm-9 col-lg-8">
         <div class="container">
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb">
@@ -61,25 +61,25 @@
                                 <h1 class="card-title">{{phone.name}}</h1>
                                 <hr>
                                 <div class="row text-left">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <dl>
                                             <dt>Announced:</dt>
                                             <dd>{{phone.announced_date}}</dd>
                                         </dl>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <dl>
                                             <dt>Resolution:</dt>
                                             <dd>{{phone.display_resolution}}</dd>
                                         </dl>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <dl>
                                             <dt>Weight:</dt>
                                             <dd>{{phone.weight}} g</dd>
                                         </dl>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
                                         <dl>
                                             <dt>OS:</dt>
                                             <dd>{{phone.os}}</dd>
@@ -99,6 +99,8 @@
             {% endfor %}
             {% endif %}
         </div>
+        <!-- Footer -->
+        {% include 'partials/_footer.html' %}
     </div>
 
     <div class="right-menu col-md-2 col-lg-2">

@@ -50,25 +50,25 @@
                 <h5 class="card-title">{{phone.name}}</h5>
                 <hr>
                 <div class="row" style="text-align:left">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <dl>
                             <dt>Announced:</dt>
                             <dd>{{phone.announced_date}}</dd>
                         </dl>
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <dl>
                             <dt>Resolution:</dt>
                             <dd>{{phone.display_resolution}}</dd>
                         </dl>
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <dl>
                             <dt>Weight:</dt>
                             <dd>{{phone.weight}} g</dd>
                         </dl>
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <dl>
                             <dt>OS:</dt>
                             <dd>{{phone.os}}</dd>
@@ -139,8 +139,10 @@
         </div>
     </div>
 </section>
+{% include 'partials/_footer.html' %}
 
 {% endblock %}
+
 {% block javascript %}
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script>
@@ -150,11 +152,11 @@
             items: 3,
             loop: true,
             margin:10,
-            autoplay: true,
+            /*autoplay: false,
             autoplayTimeout: 2000,
-            autoplayHoverPause: true,
+            autoplayHoverPause: true,*/
             responsiveClass:true,
-            autoHeight: false,
+            autoHeight: true,
             responsive:{
                 0:{
                     items:1,

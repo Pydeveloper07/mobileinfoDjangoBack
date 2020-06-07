@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block content %}
-<div class="content" style="margin-left:0">
+<div class="search-content" style="margin-left:0">
     {% include 'partials/_search.html' %}
     <section class="section container mb-5">
         <!-- Breadcrumb -->
@@ -33,25 +33,25 @@
                         <h1 class="card-title">{{phone.name}}</h1>
                         <hr>
                         <div class="row text-left">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
                                 <dl>
                                     <dt>Announced:</dt>
                                     <dd>{{phone.announced_date}}</dd>
                                 </dl>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
                                 <dl>
                                     <dt>Resolution:</dt>
                                     <dd>{{phone.display_resolution}}</dd>
                                 </dl>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
                                 <dl>
                                     <dt>Weight:</dt>
                                     <dd>{{phone.weight}} g</dd>
                                 </dl>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
                                 <dl>
                                     <dt>OS:</dt>
                                     <dd>{{phone.os}}</dd>
@@ -72,6 +72,9 @@
     </section>
 </div>
 {% endblock %}
+
+<!-- Footer -->
+{% include 'partials/_footer.html' %}
 
 {% block javascript %}
 <script>

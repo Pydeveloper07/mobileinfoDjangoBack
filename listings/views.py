@@ -19,8 +19,10 @@ def listing(request, listing_id):
     phone = get_object_or_404(MobilePhone, pk=listing_id)
     if request.user.is_authenticated:
         new_review, old_review = PhoneReviews.objects.get_or_create(username=request.user, phone_id=MobilePhone.objects.get(id=listing_id))
+    comments = Comment.objects.filter(phone_id=listing_id, reply_id=None)
     context = {
         'phone':phone,
+        'comments':comments,
     }
     return render(request, 'listings/listing.html', context)
 
