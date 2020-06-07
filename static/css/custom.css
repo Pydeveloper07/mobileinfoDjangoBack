@@ -101,6 +101,11 @@ html, body{
 }
 .card .more-info{
     text-align:center;
+    position:absolute;
+    bottom: 2%;
+    width: 80% !important;
+    margin-left:50%;
+    transform:translateX(-55%);
 }
 .card .more-info a{
     display:block;
@@ -329,7 +334,7 @@ footer .vcenter{
 }
 
 /*Listings page css*/
-.content, .side-menu, .right-menu{
+.content, .side-menu, .right-menu, .search-content{
     margin-top:70px;
 }
 .side-menu{
